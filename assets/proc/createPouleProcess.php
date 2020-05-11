@@ -21,7 +21,7 @@ if(isset($_POST['submitPoule'])) {
 			if($user->authenticateUser($userEmail, $password)) {
 				if($poule->createPoule($_SESSION['user_id'], $pouleName)) {
 					if($poule->addUserToPoule($_SESSION['user_id'], $poule->lastPouleId())) {
-						echo "YASSS LADSSS";
+						echo "yass ladss";
 					} else {
 						echo "error, adding user to poule";
 					}

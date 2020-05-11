@@ -1,9 +1,9 @@
 <?php
 
+session_start();
+
 if(isset($_SESSION['user_id'])) {
-	echo "Hello, " . $_SESSION['user_name'];
-} else {
-	echo "No Session.";
+	Header("Location: home.php");
 }
 
 ?>
@@ -85,7 +85,7 @@ if(isset($_SESSION['user_id'])) {
 										</div>
 
 										<div class="col-75">
-											<input type="text" id="userEmail" name="userEmail" placeholder="Uw email..." required="true">
+											<input type="email" id="userEmail" name="userEmail" placeholder="Uw email..." required="true">
 										</div>
 									</div>
 

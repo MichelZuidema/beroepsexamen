@@ -7,12 +7,15 @@ error_reporting(E_ALL);
 require_once 'db/database.class.php';
 require_once 'db/Poule/poule.inc.php';
 require_once 'db/Poule/pouleAction.inc.php';
+require_once 'db/User/user.inc.php';
+require_once 'db/User/userAction.inc.php';
+require_once 'db/Country/country.inc.php';
+require_once 'db/Country/countryAction.inc.php';
 
-$poule = new pouleAction();
 $db = new Database();
+$poule = new pouleAction();
+$user = new userAction();
+$country = new countryAction();
 
-if($poule->createPoule(1, 'yeet')) {
-	echo "ye: " . $poule->test();
-} else {
-	echo "noob";
-}
+echo '<pre>';
+print_r($country->countryList());

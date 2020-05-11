@@ -7,14 +7,19 @@ require_once 'assets/db/User/user.inc.php';
 require_once 'assets/db/User/userAction.inc.php';
 require_once 'assets/db/Poule/poule.inc.php';
 require_once 'assets/db/Poule/pouleAction.inc.php';
+require_once 'assets/db/Country/country.inc.php';
+require_once 'assets/db/Country/countryAction.inc.php';
 session_start();
 
 $user = new userAction();
-$pouleAction = new pouleAction();
+$poule = new pouleAction();
+$countryAction = new countryAction();
 
 if(!$user->isUserAuthenticated()) {
 	Header("Location: index.php");
 }
+
+$id = $_GET['pouleId'];
 
 ?>
 <html>
@@ -28,6 +33,7 @@ if(!$user->isUserAuthenticated()) {
 		<link rel="Stylesheet" href="assets/css/main.css">
 	</head>
 	<body>
+
 		<?php require_once 'assets/inc/header.php'; ?>
 
 		<main>
@@ -43,22 +49,27 @@ if(!$user->isUserAuthenticated()) {
 
 			<section id="content">
 				<div class="container">
-					<div class="grid-poule">
-					
+					<section class="poule">
+						<div class="container">
+							<h1><?php echo $poule->showPouleName($id); ?></h1>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae incidunt architecto nobis iusto modi, accusamus pariatur. Fugit nobis voluptates reprehenderit neque sunt eligendi, quas doloribus eius facilis totam laborum odio!</p>
 
-						<?php 
-							$data[] = $pouleAction->showAllPoulesForUser($_SESSION['user_id']);
-							if(!empty($data)) {
-								foreach($pouleAction->showAllPoulesForUser($_SESSION['user_id']) as $poule) {
-									echo '<button class="poule-btn">';
-									echo '<a href="poule.php?pouleId=' . $poule['poule_id'] . '">' . $poule['poule_name'] .'</a>';
-									echo '</a>';
-								}
-							} else {
-								echo "No poules found fur ye";
-							}
-						?>
-					</div>
+							<div id="poule-country-grid">
+								<?php 
+									for($i = 0; $i < 4; $i++) {
+										echo "Land: " . $i;
+										echo "<select>";
+										echo "<option value='0'>Selecteer een optie</option>";
+										foreach($countryAction->countryList() as $country) {
+											echo "<option value='0'>" . $country['country_name'] . "</option>";
+										}
+										echo "</select>";
+									}
+								?>
+							</div>
+							<input type="submit" value="Submit" name="submitLogin" id="poule-country-btn">
+						</div>
+					</section>
 				</div>
 			</section>
 		</main>
