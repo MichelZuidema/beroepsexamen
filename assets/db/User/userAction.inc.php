@@ -31,6 +31,15 @@ class userAction extends User {
             return true;
         }
     }
+
+    public function setSelectedCountry($number, $country_id, $user_id)
+    {
+        if($this->setSelectedCountryProcess($number, $country_id, $user_id)) {
+            echo "ok";
+        } else {
+            echo "ye";
+        }
+    }
 }
 
 ?>

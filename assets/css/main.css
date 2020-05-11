@@ -167,7 +167,7 @@ header a:hover{
 .poule {
 	border: 2px solid #1b8d9b;
 	border-radius: 5px;
-	height: 23.2vh;
+	height: 24.5vh;
 	text-align: center;
 }
 
@@ -177,6 +177,6 @@ header a:hover{
 
 #poule-country-grid {
 	display: grid;
-	grid-template-columns: 50px auto 50px auto 50px auto 50px auto;
+	grid-template-columns: 60px auto 60px auto 60px auto 60px auto;
 	grid-gap: 20px;
 }

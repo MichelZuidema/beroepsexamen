@@ -27,6 +27,16 @@ class User extends Database {
             return false;
         }
     }
+
+    protected function setSelectedCountryProcess($number, $country_id, $user_id) {
+        $sql = "UPDATE user SET user_sel_country_$number = $country_id WHERE user_id = $user_id";
+
+        if($this->getConnection()->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>

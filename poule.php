@@ -53,21 +53,23 @@ $id = $_GET['pouleId'];
 						<div class="container">
 							<h1><?php echo $poule->showPouleName($id); ?></h1>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae incidunt architecto nobis iusto modi, accusamus pariatur. Fugit nobis voluptates reprehenderit neque sunt eligendi, quas doloribus eius facilis totam laborum odio!</p>
-
-							<div id="poule-country-grid">
-								<?php 
-									for($i = 0; $i < 4; $i++) {
-										echo "Land: " . $i;
-										echo "<select>";
-										echo "<option value='0'>Selecteer een optie</option>";
-										foreach($countryAction->countryList() as $country) {
-											echo "<option value='0'>" . $country['country_name'] . "</option>";
+							
+							<form action="assets/proc/countrySelectProcess.php" method="POST">
+								<div id="poule-country-grid">
+									<?php 
+										for($i = 1; $i < 5; $i++) {
+											echo "Plaats: " . $i;
+											echo "<select>";
+											echo "<option value='0'>Selecteer een optie</option>";
+											foreach($countryAction->countryList() as $country) {
+												echo "<option value='" . $country['country_id'] . "'>" . $country['country_name'] . "</option>";
+											}
+											echo "</select>";
 										}
-										echo "</select>";
-									}
-								?>
-							</div>
-							<input type="submit" value="Submit" name="submitLogin" id="poule-country-btn">
+									?>
+								</div>
+								<input type="submit" value="Submit" name="submitLogin" id="poule-country-btn">
+							</form>
 						</div>
 					</section>
 				</div>

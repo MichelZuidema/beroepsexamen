@@ -17,5 +17,4 @@ $poule = new pouleAction();
 $user = new userAction();
 $country = new countryAction();
 
-echo '<pre>';
-print_r($country->countryList());
+$user->setSelectedCountry(3, 15, 9);
