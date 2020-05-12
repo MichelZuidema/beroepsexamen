@@ -11,10 +11,20 @@ require_once 'db/User/user.inc.php';
 require_once 'db/User/userAction.inc.php';
 require_once 'db/Country/country.inc.php';
 require_once 'db/Country/countryAction.inc.php';
+require_once 'mailEvent.class.php';
 
-$db = new Database();
-$poule = new pouleAction();
-$user = new userAction();
-$country = new countryAction();
+// $poule = new pouleAction();
+// echo '<pre>';
+$array = $poule->showAllUsersForPoule(35);
+// print_r($array);
 
-$user->setSelectedCountry(3, 15, 9);
+$string = "";
+foreach($array as $arr) {
+	$string .= $arr['user_email'] . ", ";
+
+}
+
+echo "test" . $string;
+
+$mail = new mailEvent("sjarreldevis@gmail.com, milanvried@gmail.com,", "title", "yeeet");
+$mail->sendMail();

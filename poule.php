@@ -10,6 +10,8 @@ require_once 'assets/db/Poule/poule.inc.php';
 require_once 'assets/db/Poule/pouleAction.inc.php';
 require_once 'assets/db/Country/country.inc.php';
 require_once 'assets/db/Country/countryAction.inc.php';
+require_once 'assets/inc/functions.php';
+
 session_start();
 
 $userAction = new userAction();
@@ -54,7 +56,7 @@ $id = $_GET['pouleId'];
 				<div class="container">
 					<section class="poule">
 						<div class="container">
-							<h1><?php echo $poule->showPouleName($id); ?></h1>
+							<h1><?= $poule->showPouleName($id); ?></h1>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae incidunt architecto nobis iusto modi, accusamus pariatur. Fugit nobis voluptates reprehenderit neque sunt eligendi, quas doloribus eius facilis totam laborum odio!</p>
 							
 							<form action="assets/proc/countrySelectProcess.php" method="POST">
@@ -123,13 +125,41 @@ $id = $_GET['pouleId'];
 								<h2>Poule Leden:</h2>
 								<ul>
 									<?php foreach($poule->showAllUsersForPoule($id) as $user) : ?>
-										<li><?php echo $user['user_name']; ?>, <?= $userAction->pointsOfUser($user['user_id'], $id)[0]['points']; ?> Punten
+										<li><?php echo $user['user_email']; ?>
 										<?php if($poule->isPouleAdmin($id, $_SESSION['user_id'])) : ?>
 											- <a href="assets/proc/deleteMember.php?user_id=<?php echo $user['user_id']; ?>&poule_id=<?php echo $id; ?>">Verwijderen</a></li>
 										<?php endif; ?>
 									<?php endforeach; ?>
 								</ul>
+								<?php if($poule->areCorrectCountriesFilled($id)) : ?>
+								<h3>Uitslagen!</h3>
+								<ul>
+									<?php $members = sortArrayOnPoints($poule->showAllUsersForPoule($id)); foreach($members as $key => $member) : ?>
+										<li>Plaats: <?= $key + 1; ?>: <?= $member['user_email']; ?> met <?= $member['points']; if($member['points'] == 1) { echo " punt"; } else { echo " punten"; }?>.</li>
+									<?php endforeach; ?>
+								</ul>
+								<?php endif; ?>
 							</div>
+							<?php if($poule->isPouleAdmin($id, $_SESSION['user_id'])) : ?>
+								<h2>Nieuw Lid Toevoegen:</h2>
+								<form action="assets/proc/createMemberForPoule.php" method="POST" name="createPoulePost">
+									<div class="row">
+										<div class="col-25">
+											<label for="userPouleName">E-Mail:</label>
+										</div>
+
+										<div class="col-75">
+											<input type="email" id="userEmail" name="userEmail" placeholder="E-Mail..." maxlength="100" required="true">
+										</div>
+									</div>
+
+									<div class="row">
+								    	<input type="submit" value="Toevoegen!" name="submitNewMember">
+								  	</div>
+
+								  	<input type="hidden" name="pouleId" value="<?= $id ?>">
+								</form>
+							<?php endif; ?>
 						</div>
 					</section>
 				</div>

@@ -4,8 +4,11 @@ session_start();
 require_once '../db/database.class.php';
 require_once '../db/User/user.inc.php';
 require_once '../db/User/userAction.inc.php';
+require_once '../db/Poule/poule.inc.php';
+require_once '../db/Poule/pouleAction.inc.php';
 
 $user = new userAction();
+$poule = new pouleAction();
 
 if(isset($_POST['submitLogin'])) {
 	for($i = 1; $i < 5; $i++)
@@ -15,6 +18,7 @@ if(isset($_POST['submitLogin'])) {
 		if(isset($_POST[$var])) {
 			if($_POST[$var] != '0') {
 				if($user->setSelectedCountry($i, $_POST[$var], $_SESSION['user_id'], $pouleId)) {
+					$poule->updatePointsForPoule($pouleId);
 					Header("Location:../../poule.php?pouleId=$pouleId&mess=Uw Geselecteerde Landen Zijn Aangepast!&color=green");
 				} else {
 					Header("Location:../../poule.php?pouleId=$pouleId&mess=Er is iets foutgegaan bij het aanpassen van uw geselecteerde landen!&color=red");

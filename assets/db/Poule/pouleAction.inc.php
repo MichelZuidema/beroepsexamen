@@ -36,7 +36,8 @@ class pouleAction extends Poule {
 		return $data;
 	}
 
-	public function isPouleAdmin($poule_id, $user_id) {
+	public function isPouleAdmin($poule_id, $user_id) 
+	{
 		$data = $this->getPouleAdmin($poule_id);
 
 		if($data[0]['poule_administrator_id'] == $user_id) {
@@ -46,22 +47,41 @@ class pouleAction extends Poule {
 		}
 	}
 
-	public function showAllUsersForPoule($poule_id) {
+	public function showAllUsersForPoule($poule_id) 
+	{
 		$data = $this->getAllUsersFromPoule($poule_id);
 
 		return $data;
 	}
 
-	public function getSelectedCountry($user_id, $poule_id, $number) {
+	public function getSelectedCountry($user_id, $poule_id, $number) 
+	{
 		$data = $this->getSelectedCountryProcess($user_id, $poule_id, $number);
 
 		return $data;
 	}
 
-	public function pointsOfUser($user_id, $poule_id) {
+	public function pointsOfUser($user_id, $poule_id) 
+	{
 		$data = $this->getPointsOfUsers($user_id, $poule_id);
 
 		return $data;
+	}
+
+	public function updatePointsForPoule($poule_id) 
+	{
+		$data = $this->updatePointsForPouleProcess($poule_id);
+
+		return $data;
+	}
+
+	public function areCorrectCountriesFilled($poule_id) 
+	{
+		if($data = $this->countFirstCorrectCountry($poule_id)['count'] > 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
 

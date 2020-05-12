@@ -24,12 +24,27 @@ class userAction extends User {
         }
     }
 
-    public function createPouleAdministrator($username, $user_email, $user_password) {
+    public function createPouleAdministrator($username, $user_email, $user_password) 
+    {
         if($this->createPouleAdministratorProcess($username, $user_email, $user_password)) {
             return true;
         } else {
             return true;
         }
+    }
+
+    public function createUser($user_email, $user_password) 
+    {
+        if($this->createPouleAdministratorProcess(NULL, $user_email, $user_password)) {
+            return true;
+        } else {
+            return true;
+        }
+    }
+
+    public function lastUserId() 
+    {
+        return $this->getLastUserId();
     }
 
     public function setSelectedCountry($number, $country_id, $user_id, $poule_id)
@@ -53,6 +68,22 @@ class userAction extends User {
         $data = $this->getPointsOfUsers($user_id, $poule_id);
 
         return $data;
+    }
+
+    public function idOfUserByEmail($email) 
+    {
+        $data = $this->getIdOfUserByEmail($email);
+
+        return $data;
+    }
+
+    public function doesUserExistWithEmail($email) 
+    {
+        if($this->doesUserExistWithEmailProcess($email)['count'] > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
