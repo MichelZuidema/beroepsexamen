@@ -5,7 +5,6 @@ session_start();
 if(isset($_SESSION['user_id'])) {
 	Header("Location: home.php");
 }
-
 ?>
 <html>
 	<head>
@@ -21,6 +20,8 @@ if(isset($_SESSION['user_id'])) {
 		<?php require_once 'assets/inc/header.php'; ?>
 
 		<main>
+			<?php require_once 'assets/inc/message.php'; ?>
+			
 			<section id="banner">
 				<div class="container">
 					<h1>E.K. 2020 Uitslagen Voorspellen!</h1>

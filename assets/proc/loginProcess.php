@@ -15,7 +15,7 @@ if(isset($_POST['submitLogin'])) {
 		if($user->authenticateUser($username, $password)) {
 			Header("Location: ../../home.php");
 		} else {
-			echo "Something went wrong!!";
+			Header("Location:../../index.php?mess=Verkeerd email en / of wachtwoord! Probeer het opnieuw!&color=red");
 		}
 	}
 }

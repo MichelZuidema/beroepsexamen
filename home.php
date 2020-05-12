@@ -2,12 +2,13 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+session_start();
 require_once 'assets/db/database.class.php';
 require_once 'assets/db/User/user.inc.php';
 require_once 'assets/db/User/userAction.inc.php';
 require_once 'assets/db/Poule/poule.inc.php';
 require_once 'assets/db/Poule/pouleAction.inc.php';
-session_start();
 
 $user = new userAction();
 $pouleAction = new pouleAction();
@@ -31,6 +32,8 @@ if(!$user->isUserAuthenticated()) {
 		<?php require_once 'assets/inc/header.php'; ?>
 
 		<main>
+			<?php require_once 'assets/inc/message.php'; ?>
+
 			<section id="banner">
 				<div class="container">
 					<h1>E.K. 2020 Uitslagen Voorspellen!</h1>

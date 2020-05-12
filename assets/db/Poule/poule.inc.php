@@ -61,6 +61,55 @@ class Poule extends Database {
             return "No results found!";
         }
 	}
+
+	protected function getPouleAdmin($poule_id) 
+	{
+		$sql = "SELECT poule_administrator_id FROM poule WHERE poule_id = $poule_id";
+
+		$result = $this->connect()->query($sql);
+        $rows = $result->num_rows;
+
+        if ($rows > 0) {
+            $row = $result->fetch_assoc();
+            $data[] = $row;
+
+            return $data;
+        } else {
+            return "No results found!";
+        }
+	}
+
+	protected function getAllUsersFromPoule($poule_id) {
+		$sql = "SELECT * FROM user LEFT JOIN user_poule ON user_poule.user_id = user.user_id WHERE user_poule.poule_id = $poule_id";
+		$result = $this->getConnection()->query($sql);
+        $rows = $result->num_rows;
+
+        if ($rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+
+            return $data;
+        } else {
+            return null;
+        }	
+	}
+
+	protected function getSelectedCountryProcess($user_id, $poule_id, $number) {
+		$sql = "SELECT user_sel_country_$number FROM user_poule WHERE user_id = $user_id AND poule_id = $poule_id";
+
+		$result = $this->connect()->query($sql);
+        $rows = $result->num_rows;
+
+        if ($rows > 0) {
+            $row = $result->fetch_assoc();
+            $data[] = $row;
+
+            return $data;
+        } else {
+            return  "No results found!";
+        }
+	}
 }
 
 ?>

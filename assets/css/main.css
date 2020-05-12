@@ -167,16 +167,52 @@ header a:hover{
 .poule {
 	border: 2px solid #1b8d9b;
 	border-radius: 5px;
-	height: 24.5vh;
-	text-align: center;
+	/*height: 50vh;*/
+	margin-bottom: 50px;
 }
 
 .poule h1 {
 	font-size: 2em;
+	text-align: center;
+}
+
+.poule p {
+	text-align: center;
 }
 
 #poule-country-grid {
 	display: grid;
 	grid-template-columns: 60px auto 60px auto 60px auto 60px auto;
 	grid-gap: 20px;
+}
+
+#poule-correct-country {
+	margin-top: 10vh;
+}
+
+#poule-table {
+	margin-top: 10vh;
+}
+
+table th td{
+	border: 1px solid #dddddd;
+}
+
+/* Message Styles */
+.message {
+	width: 99.8%;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.message h1 {
+	padding-left: 5px;
+}
+
+.message-green {
+	border: 2px solid green;
+}
+
+.message-red {
+	border: 2px solid red;
 }

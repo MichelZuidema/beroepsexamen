@@ -21,24 +21,15 @@ if(isset($_POST['submitPoule'])) {
 			if($user->authenticateUser($userEmail, $password)) {
 				if($poule->createPoule($_SESSION['user_id'], $pouleName)) {
 					if($poule->addUserToPoule($_SESSION['user_id'], $poule->lastPouleId())) {
-						echo "yass ladss";
-					} else {
-						echo "error, adding user to poule";
+						header('Location: ../../index.php?mess=Uw poule is aangemaakt! U kunt nu inloggen&color=green');
+						exit;
 					}
-				} else {
-					echo "error, creating poule";
 				}
-			} else {
-				echo "error, authentication";
-			}
-		} else {
-			echo "error, creating admin";
-		}
-	} else {
-		echo "empty stuff";
+			} 
+		} 
 	}
-} else {
-	echo "empty";
 }
+
+header('Location: ../../index.php&mess=Er is iets foutgegaan!&color=green');
 
 ?>

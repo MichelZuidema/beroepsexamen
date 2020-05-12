@@ -28,13 +28,40 @@ class User extends Database {
         }
     }
 
-    protected function setSelectedCountryProcess($number, $country_id, $user_id) {
-        $sql = "UPDATE user SET user_sel_country_$number = $country_id WHERE user_id = $user_id";
+    protected function setSelectedCountryProcess($number, $country_id, $user_id, $poule_id) {
+        $sql = "UPDATE user_poule SET user_sel_country_$number = $country_id WHERE user_id = $user_id AND poule_id = $poule_id";
 
         if($this->getConnection()->query($sql)) {
             return true;
         } else {
             return false;
+        }
+    }
+
+    protected function deleteUserFromPouleProcess($user_id, $poule_id) {
+        $sql = "DELETE FROM user_poule WHERE user_id = $user_id AND poule_id = $poule_id";
+
+        if($this->getConnection()->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    protected function getPointsOfUsers($user_id, $poule_id) 
+    {
+        $sql = "SELECT `points` FROM user_poule WHERE user_id = $user_id AND poule_id = $poule_id";
+
+        $result = $this->connect()->query($sql);
+        $rows = $result->num_rows;
+
+        if ($rows > 0) {
+            $row = $result->fetch_assoc();
+            $data[] = $row;
+
+            return $data;
+        } else {
+            return  "No results found!";
         }
     }
 }

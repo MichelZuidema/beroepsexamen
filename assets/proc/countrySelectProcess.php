@@ -1,4 +1,29 @@
 <?php
+session_start();
 
+require_once '../db/database.class.php';
+require_once '../db/User/user.inc.php';
+require_once '../db/User/userAction.inc.php';
+
+$user = new userAction();
+
+if(isset($_POST['submitLogin'])) {
+	for($i = 1; $i < 5; $i++)
+	{
+		$var = "country-" . $i;
+		$pouleId = $_POST['pouleId'];
+		if(isset($_POST[$var])) {
+			if($_POST[$var] != '0') {
+				if($user->setSelectedCountry($i, $_POST[$var], $_SESSION['user_id'], $pouleId)) {
+					Header("Location:../../poule.php?pouleId=$pouleId&mess=Uw Geselecteerde Landen Zijn Aangepast!&color=green");
+				} else {
+					Header("Location:../../poule.php?pouleId=$pouleId&mess=Er is iets foutgegaan bij het aanpassen van uw geselecteerde landen!&color=red");
+				}
+			}
+		} else {
+			Header("Location:../../poule.php?pouleId=$pouleId&mess=Er is iets foutgegaan! Probeer het opnieuw!&color=red");
+		}
+	}
+}
 
 ?>

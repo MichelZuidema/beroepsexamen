@@ -32,13 +32,27 @@ class userAction extends User {
         }
     }
 
-    public function setSelectedCountry($number, $country_id, $user_id)
+    public function setSelectedCountry($number, $country_id, $user_id, $poule_id)
     {
-        if($this->setSelectedCountryProcess($number, $country_id, $user_id)) {
-            echo "ok";
+        if($this->setSelectedCountryProcess($number, $country_id, $user_id, $poule_id)) {
+            return true;
         } else {
-            echo "ye";
+            return false;
         }
+    }
+
+    public function deleteUserFromPoule($user_id, $poule_id) {
+        if($this->deleteUserFromPouleProcess($user_id, $poule_id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function pointsOfUser($user_id, $poule_id) {
+        $data = $this->getPointsOfUsers($user_id, $poule_id);
+
+        return $data;
     }
 }
 
