@@ -5,6 +5,8 @@ require_once '../db/Poule/poule.inc.php';
 require_once '../db/Poule/pouleAction.inc.php';
 require_once '../db/User/user.inc.php';
 require_once '../db/User/userAction.inc.php';
+require_once '../inc/functions.php';
+require_once '../mailEvent.class.php';
 
 $user = new userAction();
 $poule = new pouleAction();
@@ -15,6 +17,7 @@ if(isset($_POST['submitPoule'])) {
 		$userName = filter_var($_POST['userName'], FILTER_SANITIZE_STRING);
 		$userEmail = filter_var($_POST['userEmail'], FILTER_SANITIZE_EMAIL);
 
+		// Statisch wachtwoord voor administrators
 		$password = "geheim";
 
 		if($user->createPouleAdministrator($userName, $userEmail, password_hash($password, PASSWORD_DEFAULT))) {
@@ -30,6 +33,6 @@ if(isset($_POST['submitPoule'])) {
 	}
 }
 
-header('Location: ../../index.php&mess=Er is iets foutgegaan!&color=green');
+header('Location: ../../index.php?mess=Er is iets foutgegaan!&color=red');
 
 ?>

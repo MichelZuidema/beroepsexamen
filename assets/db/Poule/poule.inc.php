@@ -1,6 +1,20 @@
 <?php
 
+/**
+ * Class Country
+ *
+ * @subpackage Database
+ * @author     Michel Zuidema <michelgzuidema@gmail.com>
+ */
 class Poule extends Database {
+	/**
+       * 
+       * Creëert de nieuwe poule in de database
+       *
+       * @param integer $administrator_id  ID van de administrator die de poule aanmaakt
+       * @param string $pouleName  Naam van de poule
+       * @return boolean
+       */
 	protected function createPouleProcess($administrator_id, $pouleName) 
 	{
 		$sql = "INSERT INTO poule (poule_id, poule_administrator_id, poule_name) VALUES (NULL, $administrator_id, '$pouleName')";
@@ -12,6 +26,14 @@ class Poule extends Database {
 		}
 	}
 
+	/**
+       * 
+       * Voegt een gebruiker toe aan een poule
+       *
+       * @param integer $user_id  ID van de user om toe te voegen
+       * @param integer $poule_id  ID van de poule om aan toe te voegen
+       * @return boolean
+       */
 	protected function addUserToPouleProcess($user_id, $poul_id) 
 	{
 		$sql = "INSERT INTO user_poule (user_id, poule_id) VALUES ($user_id, $poul_id)";
@@ -23,11 +45,24 @@ class Poule extends Database {
 		}
 	}
 
+	/**
+       * 
+       * Zoekt de laatst toegevoegde ID
+       *
+       * @return integer
+       */
 	protected function getLastPouleId() 
 	{
 		return $this->getConnection()->insert_id;
 	}
 
+	/**
+       * 
+       * Zoekt alle poules voor een gebruiker
+       *
+       * @param integer $user_id  ID van de gebruiker waarop gezocht moet worden
+       * @return array
+       */
 	protected function getAllPoulesForUser($user_id) 
 	{
 		$sql = "SELECT * FROM poule LEFT JOIN user_poule ON user_poule.poule_id = poule.poule_id WHERE user_poule.user_id = $user_id";
@@ -42,10 +77,17 @@ class Poule extends Database {
 
             return $data;
         } else {
-            return null;
+            return "empty";
         }
 	}
 
+	/**
+       * 
+       * Zoekt de naam van een poule
+       *
+       * @param integer $poule_id  ID van de poule waarop gezocht moet worden
+       * @return array
+       */
 	protected function getPouleName($poule_id)
 	{
 		$sql = "SELECT poule_name FROM poule WHERE poule_id = $poule_id";
@@ -62,6 +104,13 @@ class Poule extends Database {
         }
 	}
 
+	/**
+       * 
+       * Zoekt de administrator van een poule
+       *
+       * @param integer $poule_id  ID van de poule waarop gezocht moet worden
+       * @return array
+       */
 	protected function getPouleAdmin($poule_id) 
 	{
 		$sql = "SELECT poule_administrator_id FROM poule WHERE poule_id = $poule_id";
@@ -79,6 +128,13 @@ class Poule extends Database {
         }
 	}
 
+	/**
+       * 
+       * Zoekt alle leden van een poule
+       *
+       * @param integer $poule_id  ID van de poule waarop gezocht moet worden
+       * @return array
+       */
 	protected function getAllUsersFromPoule($poule_id) 
 	{
 		$sql = "SELECT * FROM user LEFT JOIN user_poule ON user_poule.user_id = user.user_id WHERE user_poule.poule_id = $poule_id";
@@ -96,6 +152,15 @@ class Poule extends Database {
         }	
 	}
 
+	/**
+       * 
+       * Zoekt het geselecteerde land van een gebruiker
+       *
+       * @param integer $user_id  ID van de user waarop gezocht moet worden
+       * @param integer $poule_id  ID van de poule waarop gezocht moet worden
+       * @param integer $number  Welk land geselecteerd moet worden ( 1 - 4)
+       * @return array
+       */
 	protected function getSelectedCountryProcess($user_id, $poule_id, $number) 
 	{
 		$sql = "SELECT user_sel_country_$number FROM user_poule WHERE user_id = $user_id AND poule_id = $poule_id";
@@ -113,6 +178,13 @@ class Poule extends Database {
         }
 	}
 
+	/**
+       * 
+       * Zoekt de correcte landen van een poule
+       *
+       * @param integer $poule_id  ID van de poule waarop gezocht moet worden
+       * @return array
+       */
 	protected function getCorrectCountriesForPoule($poule_id) 
 	{
 		$sql = "SELECT correct_country_id_1, correct_country_id_2, correct_country_id_3, correct_country_id_4 FROM poule WHERE poule_id = $poule_id";
@@ -130,6 +202,14 @@ class Poule extends Database {
         }
 	}
 
+	/**
+       * 
+       * Update de punten van een gebruiker
+       *
+       * @param integer $user_id  ID van de user waar de punten van aangepast moeten worden
+       * @param integer $poule_id  ID van de poule waarop gezocht moet worden
+       * @return boolean
+       */
 	protected function updatePointsForUserByPoule($user_id, $poule_id, $points) 
 	{
 		$sql = "UPDATE user_poule SET points = $points WHERE user_id = $user_id AND poule_id = $poule_id";
@@ -141,6 +221,12 @@ class Poule extends Database {
 		}
 	}
 
+	/**
+       * 
+       * Berekend de punten per poule
+       *
+       * @param integer $poule_id ID van de poule die berekend moet worden
+       */
 	protected function updatePointsForPouleProcess($poule_id)
 	{
 		$correctCountries = $this->getCorrectCountriesForPoule($poule_id);
@@ -185,6 +271,13 @@ class Poule extends Database {
 		}
 	}
 
+	/**
+       * 
+       * Bekijkt of het eerste correcte land is ingevuld van een poule
+       *
+       * @param integer $user_id  ID van de user waarop gezocht moet worden
+       * @return array
+       */
 	protected function countFirstCorrectCountry($poule_id) 
 	{
 		$sql = "SELECT COUNT(poule.correct_country_id_1) AS count FROM poule WHERE poule.poule_id = $poule_id";

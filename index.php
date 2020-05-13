@@ -1,17 +1,20 @@
 <?php
-
 session_start();
 
+// Kijk of de gebruiker is ingelogd
 if(isset($_SESSION['user_id'])) {
 	Header("Location: home.php");
 }
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="nl">
 	<head>
-		<title>EK 2020 Voorspellen.</title>
+		<title>EK 2020 | Hoofdpagina</title>
 
 		<!-- Meta Tags -->
 		<meta charset="UTF-8">
+		<meta name="description" content="Raad de uitslagen met jouw vriendengroep!">
+		<meta name="keywords" content="voetbal, ek, ek2020, 2020, vriendengroep, uitslagen, raden">
 
 		<!-- Stylesheet -->
 		<link rel="Stylesheet" href="assets/css/main.css">
@@ -20,14 +23,15 @@ if(isset($_SESSION['user_id'])) {
 		<?php require_once 'assets/inc/header.php'; ?>
 
 		<main>
+			<!-- Eventuele errors / berichten -->
 			<?php require_once 'assets/inc/message.php'; ?>
 			
 			<section id="banner">
 				<div class="container">
-					<h1>E.K. 2020 Uitslagen Voorspellen!</h1>
+					<h1>EK 2020 Uitslagen Voorspellen!</h1>
 
 					<p id="banner-content">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione in, fuga aliquid illo, porro quia dolorem itaque. Harum quis exercitationem nobis adipisci excepturi itaque ipsa amet ipsum est. Ullam, architecto.
+						Welkom op de website EK 2020 Uitslagen Voorspellen. Op deze pagina kunt u met uw vriendengroep een poule aanmaken en daarin de landen selecteren waarvan jullie denkt dat die in de top 4 belanden. Veel success!
 					</p>
 				</div>
 			</section>
@@ -36,7 +40,8 @@ if(isset($_SESSION['user_id'])) {
 				<div class="container">
 					<div class="grid">
 						<section id="create-poule">
-							<h3>Creeer Poule</h3>
+							
+							<h3>Creëer Poule</h3>
 							<section id="create-poule-form" class="content-box">
 								<form action="assets/proc/createPouleProcess.php" method="POST" name="createPoulePost">
 									<div class="row">
@@ -45,7 +50,7 @@ if(isset($_SESSION['user_id'])) {
 										</div>
 
 										<div class="col-75">
-											<input type="text" id="userPouleName" name="userPouleName" placeholder="Poule Naam..." maxlength="60" required="true">
+											<input type="text" id="userPouleName" name="userPouleName" placeholder="Poule Naam..." maxlength="60" required>
 										</div>
 									</div>
 
@@ -55,7 +60,7 @@ if(isset($_SESSION['user_id'])) {
 										</div>
 										
 										<div class="col-75">
-											<input type="text" id="userName" name="userName" placeholder="Uw Naam..." maxlength="60" required="true">
+											<input type="text" id="userName" name="userName" placeholder="Uw Naam..." maxlength="60">
 										</div>
 									</div>
 
@@ -65,7 +70,7 @@ if(isset($_SESSION['user_id'])) {
 										</div>
 										
 										<div class="col-75">
-											<input type="email" id="userEmail" name="userEmail" placeholder="Uw Email..." maxlength="100" required="true">
+											<input type="email" id="userEmail" name="userEmail" placeholder="Uw Email..." maxlength="100" required>
 										</div>
 									</div>
 
@@ -86,7 +91,7 @@ if(isset($_SESSION['user_id'])) {
 										</div>
 
 										<div class="col-75">
-											<input type="email" id="userEmail" name="userEmail" placeholder="Uw email..." required="true">
+											<input type="email" name="userEmail" placeholder="Uw email..." required>
 										</div>
 									</div>
 
@@ -96,7 +101,7 @@ if(isset($_SESSION['user_id'])) {
 										</div>
 										
 										<div class="col-75">
-											<input type="password" id="userPassword" name="userPassword" placeholder="Uw wachtwoord..." required="true">
+											<input type="password" id="userPassword" name="userPassword" placeholder="Uw wachtwoord..." required>
 										</div>
 									</div>
 

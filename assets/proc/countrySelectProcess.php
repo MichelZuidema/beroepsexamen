@@ -11,12 +11,14 @@ $user = new userAction();
 $poule = new pouleAction();
 
 if(isset($_POST['submitLogin'])) {
+	// Loop over de 4 land columns heen
 	for($i = 1; $i < 5; $i++)
 	{
 		$var = "country-" . $i;
 		$pouleId = $_POST['pouleId'];
 		if(isset($_POST[$var])) {
 			if($_POST[$var] != '0') {
+				// Zet de geselecteerde landen in de database
 				if($user->setSelectedCountry($i, $_POST[$var], $_SESSION['user_id'], $pouleId)) {
 					$poule->updatePointsForPoule($pouleId);
 					Header("Location:../../poule.php?pouleId=$pouleId&mess=Uw Geselecteerde Landen Zijn Aangepast!&color=green");

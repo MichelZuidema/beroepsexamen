@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class Database
+ *
+ * @author     Michel Zuidema <michelgzuidema@gmail.com>
+ */
 class Database {
 	private $host;
 	private $username;
@@ -11,6 +16,12 @@ class Database {
 		$this->connect();
 	}
 
+	/**
+       * 
+       * Maakt een connectie met de database
+       *
+       * @return MySQLi connectie
+       */
 	public function connect() {
 		$this->host = "localhost";
 		$this->username = "mzuidema";
@@ -26,6 +37,12 @@ class Database {
 		}
 	}
 
+	/**
+       * 
+       * Pakt de huidige MySQLi connectie
+       *
+       * @return MySQLi connectie
+       */
 	public function getConnection() {
 		if($this->connection == null) {
 			$this->connect();

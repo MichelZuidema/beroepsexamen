@@ -1,9 +1,6 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 session_start();
+// Gebruikte classes
 require_once 'assets/db/database.class.php';
 require_once 'assets/db/User/user.inc.php';
 require_once 'assets/db/User/userAction.inc.php';
@@ -13,12 +10,14 @@ require_once 'assets/db/Poule/pouleAction.inc.php';
 $user = new userAction();
 $pouleAction = new pouleAction();
 
+// Kijk of de gebruiker is ingelogd
 if(!$user->isUserAuthenticated()) {
 	Header("Location: index.php");
 }
 
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="nl">
 	<head>
 		<title>EK 2020 Voorspellen.</title>
 
@@ -39,7 +38,7 @@ if(!$user->isUserAuthenticated()) {
 					<h1>E.K. 2020 Uitslagen Voorspellen!</h1>
 
 					<p id="banner-content">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione in, fuga aliquid illo, porro quia dolorem itaque. Harum quis exercitationem nobis adipisci excepturi itaque ipsa amet ipsum est. Ullam, architecto.
+						Op deze pagina kunt u de poules zien waar u aan mee doet. Ziet u er geen? Dan moet u er een aanmaken of aan een meedoen.
 					</p>
 				</div>
 			</section>
@@ -47,18 +46,18 @@ if(!$user->isUserAuthenticated()) {
 			<section id="content">
 				<div class="container">
 					<div class="grid-poule">
-					
-
 						<?php 
-							$data[] = $pouleAction->showAllPoulesForUser($_SESSION['user_id']);
-							if(!empty($data)) {
+							$data = $pouleAction->showAllPoulesForUser($_SESSION['user_id']);
+							
+							// Kijk of er daadwerkelijk poules gevonden zijn voor de gebruiker
+							if($data != "empty") {
 								foreach($pouleAction->showAllPoulesForUser($_SESSION['user_id']) as $poule) {
 									echo '<button class="poule-btn">';
 									echo '<a href="poule.php?pouleId=' . $poule['poule_id'] . '">' . $poule['poule_name'] .'</a>';
 									echo '</a>';
 								}
 							} else {
-								echo "No poules found fur ye";
+								echo "Er zijn geen poules voor u gevonden!";
 							}
 						?>
 					</div>
