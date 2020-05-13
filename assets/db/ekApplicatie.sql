@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 13, 2020 at 12:44 PM
+-- Generation Time: May 13, 2020 at 02:50 PM
 -- Server version: 10.1.44-MariaDB-0ubuntu0.18.04.1
 -- PHP Version: 7.1.14
 
@@ -80,7 +80,11 @@ CREATE TABLE `poule` (
 --
 
 INSERT INTO `poule` (`poule_id`, `poule_administrator_id`, `poule_name`, `correct_country_id_1`, `correct_country_id_2`, `correct_country_id_3`, `correct_country_id_4`) VALUES
-(46, 53, 'Bittergarnituur', 9, 12, 20, 2);
+(47, 55, 'test_poule', 1, 3, 11, 2),
+(48, 56, 'console.log', 1, 2, 15, 8),
+(49, 56, 'window.open(url,&#39;name&#39;,&#39;height=200,width=150&#39', NULL, NULL, NULL, NULL),
+(50, 60, 'window.open(url,&#39;name&#39;,&#39;height=200,width=150&#39', NULL, NULL, NULL, NULL),
+(51, 63, 'bittergarnituur', 12, 6, 14, 7);
 
 -- --------------------------------------------------------
 
@@ -100,8 +104,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_name`, `user_email`, `user_password`) VALUES
-(53, 'Michel Zuidema', 'sjarreldevis@gmail.com', '$2y$10$5uZYcnFGwrrxb1rDiycDCeP9RBXJES/5xcbq8DhcdYL39YwvVcNrO'),
-(54, '', 'milanvried@gmail.com', '$2y$10$cQaf.0K9K5pQjoQuKLDmFO/mmTeMKSK5ZrwW7s3hwHwokibjdp3OW');
+(55, 'Geurts', 'geurts@glr.nl', '$2y$10$m48sXWpCoyiX2l2RJNbaiuKEZqcnc2CQAmEjO4GuduKf4SztkrRYS'),
+(56, 'Yvonne', 'bruin.pouw@gmail.com', '$2y$10$e3/X8xEJdM0QXsibgAvVSeJQJWdXztEzyhZRXwIim2ZOOO2PKDQUK'),
+(57, '', 'wms17468@zzrgg.com', '$2y$10$pMc75/WCOVC6UMFAKd898OqI47e/jBj1DQhi1qIxGPC8.gPfAKf66'),
+(59, '', 'ybruin@glr.nl', '$2y$10$0KDJQk/uw6xcINz8P/Isl.Om1BXbHkjZX.Qqixrl2DaLDNT7E9TKa'),
+(60, 'MichelTest', 'test@gmail.com', '$2y$10$SkyT5BHOEjKVCDAraTJSBOKklyUbw.P7r1TbJfOiEvbv9ltCbQWpC'),
+(61, '', 'thebrownpeacock@gmail.com', '$2y$10$k3WrblyWnaD/lBRLaKqMPu9YF0IBztfiZ9Rq/4jCMbz86V03aftlC'),
+(63, 'Michel Zuidema', '83239@glr.nl', '$2y$10$8IdvAdeN/gxtev7nhsM4re.Ss..mhAEqjnYd5A0ECRKzw3k.lnBai'),
+(64, '', 'milanvried@gmail.com', '$2y$10$yN.v7StN5p319mxtswGDee0zGXnZx8BFtk9jJRoVKoolHJWtKFJsC');
 
 -- --------------------------------------------------------
 
@@ -124,7 +134,18 @@ CREATE TABLE `user_poule` (
 --
 
 INSERT INTO `user_poule` (`user_id`, `poule_id`, `user_sel_country_1`, `user_sel_country_2`, `user_sel_country_3`, `user_sel_country_4`, `points`) VALUES
-(53, 46, 8, 12, 20, 10, 12);
+(53, 46, 8, 12, 20, 10, 12),
+(55, 47, 1, 2, 12, 11, 13),
+(56, 48, 15, 15, 15, 15, 8),
+(57, 47, NULL, NULL, NULL, NULL, 0),
+(56, 49, 11, 2, 3, 4, 0),
+(60, 50, NULL, NULL, NULL, NULL, 0),
+(61, 48, 19, 2, 3, 4, 7),
+(59, 49, NULL, NULL, NULL, NULL, 0),
+(59, 49, NULL, NULL, NULL, NULL, 0),
+(54, 46, NULL, NULL, NULL, NULL, 0),
+(62, 46, NULL, NULL, NULL, NULL, 0),
+(63, 51, 10, 12, 10, 10, 1);
 
 --
 -- Indexes for dumped tables
@@ -163,13 +184,13 @@ ALTER TABLE `country`
 -- AUTO_INCREMENT for table `poule`
 --
 ALTER TABLE `poule`
-  MODIFY `poule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `poule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

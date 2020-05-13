@@ -30,6 +30,8 @@ if(isset($_POST['submitLogin'])) {
 			Header("Location:../../poule.php?pouleId=$pouleId&mess=Er is iets foutgegaan! Probeer het opnieuw!&color=red");
 		}
 	}
+
+	Header("Location:../../poule.php?pouleId=$pouleId&mess=Er is iets foutgegaan! Probeer het opnieuw!&color=red");
 }
 
 ?>

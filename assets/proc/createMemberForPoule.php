@@ -21,7 +21,7 @@ if(isset($_POST['submitNewMember'])) {
 		// Als er al een gebruiker bestaat met dat email, voeg deze dan toe aan de poule
 		if($user->doesUserExistWithEmail($email)) {
 			if($poule->addUserToPoule($user->idOfUserByEmail($email)[0]['user_id'], $pouleId)) {
-				$emailContent = "Beste meneer of Mevrouw, u is zojuist toegevoegd aan een nieuwe poule! U kunt deze vinden op de hoofdpagina! ( https://83239.ict-lab.nl/ex83239/ ) ";
+				$emailContent = "Beste meneer of Mevrouw, u bent zojuist toegevoegd aan een nieuwe poule! U kunt deze vinden op de hoofdpagina! ( https://83239.ict-lab.nl/ex83239/ ) ";
 				$emailContent .= "Met vriendelijke groet.";
 
 				$mail = new mailEvent($email, "U bent toegevoegd aan een poule!", $emailContent);
@@ -33,7 +33,7 @@ if(isset($_POST['submitNewMember'])) {
 				if($poule->addUserToPoule($user->idOfUserByEmail($email)[0]['user_id'], $pouleId)) {
 				Header("Location:../../poule.php?pouleId=$pouleId&mess=De gebruiker is toegevoegt aan uw poule!&color=green");
 
-				$emailContent = "Beste meneer of Mevrouw, u is zojuist toegevoegd aan een nieuwe poule! U kunt deze poule vinden door in te loggen op de volgende website: https://83239.ict-lab.nl/ex83239/ met de volgende gegevens: ";
+				$emailContent = "Beste meneer of Mevrouw, u bent zojuist toegevoegd aan een nieuwe poule! U kunt deze poule vinden door in te loggen op de volgende website: https://83239.ict-lab.nl/ex83239/ met de volgende gegevens: ";
 				$emailContent .= "E-Mail: " . $email . ", Wachtwoord: " . $password;
 				$emailContent .= " Met vriendelijke groet.";
 
